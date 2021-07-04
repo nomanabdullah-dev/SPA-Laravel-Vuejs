@@ -35,14 +35,14 @@
                                 <div class="col-6">
                                     <div class="from-group">
                                         <label for="">Your Password</label>
-                                        <input type="text" v-model="userProfile.password" class="form-control" placeholder="password">
+                                        <input type="password" v-model="userProfile.password" class="form-control" placeholder="password">
                                     </div>
                                     <div v-if="userProfile.errors.has('password')" v-html="userProfile.errors.get('password')" class="text-danger" />
                                 </div>
                                 <div class="col-6">
                                     <div class="from-group">
                                         <label for="">Confirm Password</label>
-                                        <input type="text" v-model="userProfile.password_confirmation" class="form-control" placeholder="confirm password">
+                                        <input type="password" v-model="userProfile.password_confirmation" class="form-control" placeholder="confirm password">
                                     </div>
                                     <div v-if="userProfile.errors.has('password_confirmation')" v-html="userProfile.errors.get('password_confirmation')" class="text-danger" />
                                 </div>
