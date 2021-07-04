@@ -2,16 +2,19 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
-
+//Category Route
 import Home from '../pages/home.vue'
 import CategoryList from '../pages/category/index.vue'
 import CreateCategory from '../pages/category/create.vue'
 import EditCategory from '../pages/category/edit.vue'
-
+//Product Route
 import ProductList from '../pages/product/index.vue'
 import CreateProduct from '../pages/product/create.vue'
 import EditProduct from '../pages/product/edit.vue'
-
+//Authentication Route
+import Login from '../pages/auth/login.vue'
+//Dashboard Route
+import Dashboard from '../pages/dashboard/index.vue'
 
 
 const routes = new VueRouter({
@@ -54,6 +57,18 @@ const routes = new VueRouter({
             path: '/product/edit/:id',
             component: EditProduct,
             name: 'edit-product'
+        },
+        //Authentication Route
+        {
+            path: '/auth/login',
+            component: Login,
+            name: 'login'
+        },
+        //Dashboard Route
+        {
+            path: '/dashboard',
+            component: Dashboard,
+            name: 'dashboard'
         }
     ]
 });
