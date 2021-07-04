@@ -61,6 +61,9 @@
                 axios.get('/api/user').then(response => {
                     let user = response.data;
                     this.$store.commit('SET_USER', user);
+                    this.$store.commit('SET_AUTHENTICATED', true);
+
+                    localStorage.setItem("auth", true);
                 });
             }
         },
