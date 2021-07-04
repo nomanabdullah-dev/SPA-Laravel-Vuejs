@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 //Category Route
 import Home from '../pages/home.vue'
+import ProductDetails from '../pages/productDetails.vue'
 import CategoryList from '../pages/category/index.vue'
 import CreateCategory from '../pages/category/create.vue'
 import EditCategory from '../pages/category/edit.vue'
@@ -93,6 +94,12 @@ const routes = new VueRouter({
             meta: {
                 requiresAuth: true
             }
+        },
+        //Product Details Route
+        {
+            path: '/product/:slug',
+            component: ProductDetails,
+            name: 'product-details'
         }
     ]
 });

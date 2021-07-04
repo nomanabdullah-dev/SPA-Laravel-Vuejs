@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Product::with('category')->latest()->get();
         return response()->json($products, 200);
     }
 
@@ -25,17 +25,19 @@ class ProductController extends Controller
             'title'         => 'required|max:255',
             'price'         => 'required|integer',
             'image'         => 'required|image|max:2048',
-            'description'   => 'required'
+            'description'   => 'required',
+            'category_id'   => 'required'
         ]);
 
         $product = Product::create([
             'title'         => $request->title,
             'slug'          => Str::slug($request->title),
             'price'         => $request->price,
-            'description'   => $request->description
+            'description'   => $request->description,
+            'category_id'   => $request->category_id
         ]);
         if($request->image){
-            unlink(public_path('storage/product/'.$product->image));
+            //unlink(public_path('storage/product/'.$product->image));
             $imageName = time().'_'. uniqid() .'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('storage/product'), $imageName);
             $product->image = '/storage/product/' . $imageName;
@@ -61,14 +63,16 @@ class ProductController extends Controller
             'title'         => "required|max:255|unique:products,title,$product->id",
             'price'         => 'required|integer',
             'image'         => 'sometimes|nullable|image|max:2048',
-            'description'   => 'required'
+            'description'   => 'required',
+            'category_id'   => 'required'
         ]);
 
         $product->update([
             'title'         => $request->title,
             'slug'          => Str::slug($request->title),
             'price'         => $request->price,
-            'description'   => $request->description
+            'description'   => $request->description,
+            'category_id'   => $request->category_id
         ]);
         if($request->image){
             $productImage   = $product->image;

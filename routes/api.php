@@ -19,3 +19,4 @@ Route::middleware(['auth:sanctum'])->group(function(){
 });
 
 Route::get('products', [PublicAPIController::class,'products']);
+Route::get('products/{slug}', [PublicAPIController::class,'product_details']);

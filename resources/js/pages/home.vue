@@ -8,9 +8,13 @@
                 <div class="card">
                     <img class="card-img-top" :src="product.image" style="height:150px; object-fit:cover; overflow:hidden" alt="Card image cap">
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="badge badge-danger mb-2">{{ product.category.name }}</label>
+                            <h4>${{ product.price }}</h4>
+                        </div>
                         <h5 class="card-title">{{ product.title }}</h5>
                         <!-- <p class="card-text">{{ product.description }}</p> -->
-                        <a href="#" class="btn btn-primary">{{ product.price }}</a>
+                        <router-link :to="{name: 'product-details', params:{slug: product.slug} }" class="btn btn-primary">View Product</router-link>
                     </div>
                 </div>
             </div>

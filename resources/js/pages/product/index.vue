@@ -15,7 +15,7 @@
                                     <th style="width:80px">ID</th>
                                     <th>Image</th>
                                     <th>Title</th>
-                                    <th>Slug</th>
+                                    <th>Category</th>
                                     <th>Price</th>
                                     <th>Description</th>
                                     <th style="width:150px">Action</th>
@@ -30,7 +30,10 @@
                                         </div>
                                     </td>
                                     <td>{{ product.title }}</td>
-                                    <td>{{ product.slug }}</td>
+                                    <td>
+                                        <span v-if="product.category">{{ product.category.name }}</span>
+                                        <span v-else>{{ product.category_id  }}</span>
+                                    </td>
                                     <td>{{ product.price }}</td>
                                     <td>{{ product.description }}</td>
                                     <td style="width:150px">

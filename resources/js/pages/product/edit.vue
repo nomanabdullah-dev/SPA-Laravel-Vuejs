@@ -18,6 +18,14 @@
                                         class="text-danger" />
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Select Product Category</label>
+                                    <select name="category_id" class="form-control" v-model="productForm.category_id">
+                                        <option value="" style="display:none" selected>Select Category</option>
+                                        <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.name }}</option>
+                                    </select>
+                                    <div v-if="productForm.errors.has('category_id')" v-html="productForm.errors.get('category_id')" class="text-danger" />
+                                </div>
+                                <div class="form-group">
                                     <label for="">Product Price</label>
                                     <input type="text" v-model="productForm.price" name="price" class="form-control"
                                         placeholder="product price">
@@ -67,12 +75,14 @@
             return {
                 productForm: new Form({
                     title: '',
+                    category_id: '',
                     price: '',
                     image: '',
                     description: '',
                     _method: 'put'
                 }),
-                image: ''
+                image: '',
+                categories: []
             }
         },
         methods: {
@@ -85,6 +95,7 @@
                     this.productForm.title  = product.title;
                     this.productForm.price  = product.price;
                     this.productForm.description = product.description;
+                    this.productForm.category_id = product.category_id;
                     this.image              = product.image;
                 });
             },
@@ -112,10 +123,16 @@
                 const file = e.target.files[0]
                 // Do some client side validation...
                 this.productForm.image = file
+            },
+            loadCategories(){
+                axios.get('/api/category').then(response => {
+                    this.categories = response.data;
+                });
             }
         },
         mounted() {
             this.loadProductData();
+            this.loadCategories();
         }
     }
 
